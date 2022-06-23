@@ -1,0 +1,107 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Sign blade */
+.sign-heading {
+    text-align: center;
+}
+
+.sign-form {
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.sign-form-parent {
+    display: flex;
+   justify-content: right;
+}
+
+.sign-button {
+    text-align: center;
+}
+
+.sign-helper {
+    text-align: right;
+}
+
+/* Dashboard blade */
+.auth-user-greeting {
+    display: flex;
+    align-items: center;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: right;
+}
+
+.nav-parent {
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    font-size: 18px;
+    margin-top: 20px;
+    color: black;
+}
+
+.navbar-items {
+    display: inline-flex;
+    align-items: center;
+}
+
+.create-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.form-create {
+    margin-top: 30px;
+    border: 1px black solid;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* All posts */
+.active {
+    color: red !important;
+    font-size: 19px;
+}
+
+.post {
+    margin: 10px;
+    padding: 15px;
+    font-size: 18px;
+    border: 1px black solid;
+    border-radius: 5px;
+    min-height: 300px !important;
+}
+
+
+.all-posts-heading {
+    margin-bottom: 50px;
+    font-family: Calibri;
+    text-decoration: underline;
+}
+
+.all-post-heading {
+    text-align: center;
+    font-size: 24px;
+}
+
+.like-btn-parent {
+    text-align: right;
+}
+
+.action-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
