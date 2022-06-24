@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 class DashboardController extends Controller
 {
     public function showAllPosts () {
-        $allPosts = Post::get();
+        $allPosts = Post::with('user')->get();
         return view('allPosts')->with('allPosts', $allPosts);
     }
 

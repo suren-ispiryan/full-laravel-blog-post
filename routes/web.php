@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SignController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,12 @@ use App\Http\Controllers\SignController;
 // Dashboard routes
 Route::get('/', [DashboardController::class, 'showAllPosts']);
 Route::get('/auth-user-posts', [DashboardController::class, 'showAuthUserPosts']);
+
+// Profile
+Route::get('/my-profile/{id}', [ProfileController::class, 'showMyProfile']);
+Route::get('/user-profile/{id}', [ProfileController::class, 'showChosenUserProfile']);
+Route::get('/follow/{id}', [ProfileController::class, 'follow']);
+Route::get('/home-page', [ProfileController::class, 'homePage']);
 
 // Liked posts
 Route::get('/liked-user-posts', [DashboardController::class, 'showLikedPosts']);

@@ -17,6 +17,16 @@
                         <a href="/" class="{{ (request()->is('/')) ? 'active' : 'text-success' }}">All posts</a>
                     </li>
                 @auth
+                     <li class="navbar-items btn">
+                        <a href="/home-page" class="{{ (request()->is('home-page')) ? 'active' : 'text-success' }}">Home</a>
+                    </li>
+                    <li class="navbar-items btn">
+                        <a href="/my-profile/{{Auth::user()->id}}"
+                           class="{{ (request()->is('my-profile/*') || request()->is('user-profile/*')) ? 'active' : 'text-success' }}"
+                        >
+                            Profile
+                        </a>
+                    </li>
                     <li class="navbar-items btn">
                         <a href="/create-post" class="{{ (request()->is('create-post')) ? 'active' : 'text-success' }}">Create</a>
                     </li>
@@ -53,6 +63,8 @@
                     </div>
 
                     <div class="col-md-12">
+                        @yield('userProfile')
+                        @yield('homePage')
                         @yield('allPosts')
                         @yield('myPosts')
                         @yield('likedPosts')

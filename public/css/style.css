@@ -105,3 +105,32 @@ a {
     display: flex;
     justify-content: space-between;
 }
+
+.like-name-parent {
+    display: flex;
+    justify-content: space-between;
+}
+.user-name {
+    text-align: left;
+}
+
+/* Profile */
+.profile-sections-heading {
+    text-decoration: underline;
+}
+
+.user-image {
+    height: 300px;
+    width: 300px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.user-data {
+    font-size: 22px;
+}
+
+.profile-posts-parent {
+    display: flex;
+    justify-content: left;
+}
