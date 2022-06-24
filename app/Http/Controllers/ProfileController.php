@@ -26,7 +26,6 @@ class ProfileController extends Controller
     }
 
     public function follow ($id) {
-dd($id);
         return redirect()->back();
     }
 }
