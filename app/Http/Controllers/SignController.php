@@ -27,7 +27,7 @@ class SignController extends Controller
             'password' => $password
         ];
         if (Auth::attempt($credentials)) {
-            return redirect('/create-post');
+            return redirect('/all-posts');
         }
         $errLogin = 'Username or password is incorrect';
         return view('signIn')->with('errLogin', $errLogin);
@@ -55,6 +55,6 @@ class SignController extends Controller
 
     public function signOut(){
         Auth::logout();
-        return redirect('/');
+        return redirect('/all-posts');
     }
 }
