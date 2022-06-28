@@ -10,14 +10,18 @@ use Carbon\Carbon;
 // Models
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Follow;
 
 class ProfileController extends Controller
 {
     public function homePage () {
-        $data = User::with('followers')->find(1);
-//        dd($data->followers->toArray());
-        return view('homePage');
+        $data = User::with('posts')
+        ->whereHas('followers', function ($query) {
+            $query->where('follower_id', Auth::user()->id);
+        })
+        ->whereDoesntHave('followers', function ($query) {
+            $query->where('following_id', Auth::user()->id);
+        })->get();
+        return view('homePage')->with('blogPosts', $data);
     }
 
     public function showMyProfile ($id) {
@@ -39,6 +43,12 @@ class ProfileController extends Controller
                 'updated_at' => Carbon::now()
             )
         );
+//        User::following()->attach([
+//            'follower_id' => Auth::user()->id,
+//            'following_id' => $id,
+//            'created_at' => Carbon::now(),
+//            'updated_at' => Carbon::now()
+//        ]);
         return redirect()->back();
     }
 }
