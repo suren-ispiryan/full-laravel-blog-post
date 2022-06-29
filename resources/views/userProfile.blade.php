@@ -29,6 +29,34 @@
                         <button class="btn btn-primary mt-2">Unfollow</button>
                     </a>
                 @endif
+                @if(!request()->is(`my-profile/{{dd(auth()->user()->id)}}`))
+                    <div class="row">
+                       <div class="col-md-6">
+                           <form action="/change-password" method="POST">
+                               @csrf
+
+                               <input
+                                   type="password"
+                                   class="form-control mt-2"
+                                    name="passwordChange"
+                                   placeholder="Write a new password"
+                               >
+                               <input
+                                   type="password"
+                                   class="form-control mt-2"
+                                   name="repeatPasswordChange"
+                                   placeholder="Repeat a new password"
+                               >
+                               <button
+                                   class="btn btn-warning mt-2"
+                               >
+                                   Change password
+                               </button>
+                           </form>
+                       </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                @endif
             </div>
         </div>
 
