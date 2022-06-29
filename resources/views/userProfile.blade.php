@@ -25,6 +25,9 @@
                     <a href="/follow/{{$data[0]->user->id}}">
                         <button class="btn btn-primary mt-2">Follow</button>
                     </a>
+                    <a href="/unfollow/{{$data[0]->user->id}}">
+                        <button class="btn btn-primary mt-2">Unfollow</button>
+                    </a>
                 @endif
             </div>
         </div>
