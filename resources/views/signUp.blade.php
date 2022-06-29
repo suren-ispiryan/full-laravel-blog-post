@@ -18,35 +18,41 @@
                     <form class="sign-form p-4" action="/register-user" method="POST">
                         @csrf
 
+                        <h2 class="sign-heading">Register</h2>
+
+                        @if(count($errors) > 0)
+                            @foreach($errors->all() as $error)
+                                <p class="alert alert-danger my-2">{{ $error }}</p>
+                            @endforeach
+                        @endif
+
                         @isset($errMsgRegistration)
                             <p class="text-danger text-center">{{ $errMsgRegistration }}</p>
                         @endisset
 
-                        <h2 class="sign-heading">Register</h2>
-
                         <div class="form-group mt-4">
-                            <label for="firstName" class="pl-1">
-                                First name
+                            <label for="name" class="pl-1">
+                                name
                             </label>
                             <input
-                                name="registerFirstName"
+                                name="name"
                                 type="text"
                                 class="form-control"
-                                id="firstName"
+                                id="name"
                                 placeholder="First name"
                             >
                         </div>
 
-                        <div class="form-group">
-                            <label for="lastName" class="pl-1">
-                                Last name
+                        <div class="form-group mt-4">
+                            <label for="surname" class="pl-1">
+                                Surname
                             </label>
                             <input
-                                name="registerLastName"
+                                name="surname"
                                 type="text"
                                 class="form-control"
-                                id="lastName"
-                                placeholder="Lase name"
+                                id="surname"
+                                placeholder="First name"
                             >
                         </div>
 
@@ -55,7 +61,7 @@
                                 Email address
                             </label>
                             <input
-                                name="registerEmail"
+                                name="email"
                                 type="email"
                                 class="form-control"
                                 id="registerEmail"
@@ -68,7 +74,7 @@
                                 Password
                             </label>
                             <input
-                                name="registerPassword"
+                                name="password"
                                 type="password"
                                 class="form-control"
                                 id="registerPassword"

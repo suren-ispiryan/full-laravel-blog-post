@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 // Requests
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ChangePasswordRequest;
 // Facades
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +22,9 @@ class SignController extends Controller
         return view('signUp');
     }
 
-    public function signIn (Request $request) {
-        $email = $request->loginEmail;
-        $password = $request->loginPassword;
+    public function signIn (LoginRequest $request) {
+        $email = $request->email;
+        $password = $request->password;
         $credentials = [
             'email' => $email,
             'password' => $password
@@ -33,14 +36,9 @@ class SignController extends Controller
         return view('signIn')->with('errLogin', $errLogin);
     }
 
-    public function signUp (Request $request) {
-        if ($request->registerPassword === $request->reEnterRegisterPassword) {
-            $user = User::create([
-                'name' => $request->registerFirstName,
-                'surname' => $request->registerLastName,
-                'email' => $request->registerEmail,
-                'password' => Hash::make($request->registerPassword)
-            ]);
+    public function signUp (RegisterRequest $request) {
+        if ($request->password === $request->reEnterRegisterPassword) {
+            $user = User::create($request->toArray());
             if ($user) {
                 Auth::login($user);
                 return view('SignIn');
@@ -53,8 +51,8 @@ class SignController extends Controller
         return abort(403);
     }
 
-    public function changePass (Request $request) {
-        $passChange = $request->input('passwordChange');
+    public function changePass (ChangePasswordRequest $request) {
+        $passChange = $request->input('password');
         $passChangeRepeat = $request->input('repeatPasswordChange');
         if ($passChange === $passChangeRepeat) {
             User::where('id', Auth::user()->id)->update([

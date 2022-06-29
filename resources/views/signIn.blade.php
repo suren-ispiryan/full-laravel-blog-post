@@ -17,6 +17,13 @@
                 <div class="col-md-6">
                     <form class="sign-form p-4" action="/login-user" method="POST">
                         <h2 class="sign-heading">Login</h2>
+
+                        @if(count($errors) > 0)
+                            @foreach($errors->all() as $error)
+                                <p class="alert alert-danger my-2">{{ $error }}</p>
+                            @endforeach
+                        @endif
+
                         @isset($errLogin)
                             <p class="text-danger text-center">{{ $errLogin }}</p>
                         @endisset
@@ -28,7 +35,7 @@
                                 Email address
                             </label>
                             <input
-                                name="loginEmail"
+                                name="email"
                                 type="email"
                                 class="form-control"
                                 id="exampleInputEmail1"
@@ -42,7 +49,7 @@
                                 Password
                             </label>
                             <input
-                                name="loginPassword"
+                                name="password"
                                 type="password"
                                 class="form-control"
                                 id="exampleInputPassword1"
