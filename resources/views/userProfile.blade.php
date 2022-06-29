@@ -38,20 +38,26 @@
                                <input
                                    type="password"
                                    class="form-control mt-2"
-                                    name="passwordChange"
-                                   placeholder="Write a new password"
+                                   name="password"
+                                   placeholder="New password"
                                >
                                <input
                                    type="password"
                                    class="form-control mt-2"
                                    name="repeatPasswordChange"
-                                   placeholder="Repeat a new password"
+                                   placeholder="Confirm new password"
                                >
                                <button
                                    class="btn btn-warning mt-2"
                                >
                                    Change password
                                </button>
+
+                               @if(count($errors) > 0)
+                                   @foreach($errors->all() as $error)
+                                       <h6 class="alert alert-danger my-2">{{ $error }}</h6>
+                                   @endforeach
+                               @endif
                            </form>
                        </div>
                         <div class="col-md-6"></div>

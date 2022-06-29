@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 // Requests
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 // Facades
 use Illuminate\Support\Facades\Auth;
 // Models
@@ -28,7 +30,7 @@ class DashboardController extends Controller
         return view('create');
     }
 
-    public function create (Request $request) {
+    public function create (CreatePostRequest $request) {
         $post = Post::create([
             'user_id' => Auth::user()->id,
             'heading' => $request->heading,
@@ -49,7 +51,7 @@ class DashboardController extends Controller
         return view('update')->with('updatedPost', $updatedPost);
     }
 
-    public function update (Request $request, $id) {
+    public function update (UpdatePostRequest $request, $id) {
         $updatedPost = Post::where('id', $id)->update([
             'heading' => $request->heading,
             'content' => $request->content

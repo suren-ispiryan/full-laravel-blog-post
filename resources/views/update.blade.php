@@ -19,6 +19,12 @@
 
                     @csrf
 
+                    @if(count($errors) > 0)
+                        @foreach($errors->all() as $error)
+                            <p class="alert alert-danger my-2">{{ $error }}</p>
+                        @endforeach
+                    @endif
+
                     @isset($successMsg)
                         <p class="text-success text-center">{{ $successMsg }}</p>
                     @endisset
