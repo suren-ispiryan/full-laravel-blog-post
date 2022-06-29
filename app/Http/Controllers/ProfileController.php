@@ -43,12 +43,14 @@ class ProfileController extends Controller
                 'updated_at' => Carbon::now()
             )
         );
-//        User::following()->attach([
-//            'follower_id' => Auth::user()->id,
-//            'following_id' => $id,
-//            'created_at' => Carbon::now(),
-//            'updated_at' => Carbon::now()
-//        ]);
+        return redirect()->back();
+    }
+
+    public function unfollow ($id) {
+        DB::table('follows')
+          ->where('follower_id', Auth::user()->id)
+          ->where('following_id', $id)
+          ->delete();
         return redirect()->back();
     }
 }

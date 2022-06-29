@@ -24,6 +24,7 @@ Route::get('/auth-user-posts', [DashboardController::class, 'showAuthUserPosts']
 Route::get('/my-profile/{id}', [ProfileController::class, 'showMyProfile']);
 Route::get('/user-profile/{id}', [ProfileController::class, 'showChosenUserProfile']);
 Route::get('/follow/{id}', [ProfileController::class, 'follow']);
+Route::get('/unfollow/{id}', [ProfileController::class, 'unfollow']);
 Route::get('/home-page', [ProfileController::class, 'homePage']);
 
 // Liked posts
