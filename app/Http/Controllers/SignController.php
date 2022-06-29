@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\Auth;
 
 class SignController extends Controller
 {
-    public function showSignIn () {
+    public function showSignIn ()
+    {
         return view('signIn');
     }
 
-    public function showSignUp () {
+    public function showSignUp ()
+    {
         return view('signUp');
     }
 
-    public function signIn (LoginRequest $request) {
+    public function signIn (LoginRequest $request)
+    {
         $email = $request->email;
         $password = $request->password;
         $credentials = [
@@ -36,7 +39,8 @@ class SignController extends Controller
         return view('signIn')->with('errLogin', $errLogin);
     }
 
-    public function signUp (RegisterRequest $request) {
+    public function signUp (RegisterRequest $request)
+    {
         if ($request->password === $request->reEnterRegisterPassword) {
             $user = User::create($request->toArray());
             if ($user) {
@@ -51,7 +55,8 @@ class SignController extends Controller
         return abort(403);
     }
 
-    public function changePass (ChangePasswordRequest $request) {
+    public function changePass (ChangePasswordRequest $request)
+    {
         $passChange = $request->input('password');
         $passChangeRepeat = $request->input('repeatPasswordChange');
         if ($passChange === $passChangeRepeat) {
@@ -65,7 +70,8 @@ class SignController extends Controller
         }
     }
 
-    public function signOut(){
+    public function signOut ()
+    {
         Auth::logout();
         return redirect('/all-posts');
     }

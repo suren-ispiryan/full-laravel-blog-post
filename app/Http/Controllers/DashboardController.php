@@ -16,21 +16,25 @@ use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
-    public function showAllPosts () {
+    public function showAllPosts ()
+    {
         $allPosts = Post::with('user')->get();
         return view('allPosts')->with('allPosts', $allPosts);
     }
 
-    public function showAuthUserPosts () {
+    public function showAuthUserPosts ()
+    {
         $authUserPosts = User::find(Auth::user()->id)->Posts;
         return view('myPosts')->with('authUserPosts', $authUserPosts);
     }
 
-    public function createPost () {
+    public function createPost ()
+    {
         return view('create');
     }
 
-    public function create (CreatePostRequest $request) {
+    public function create (CreatePostRequest $request)
+    {
         $post = Post::create([
             'user_id' => Auth::user()->id,
             'heading' => $request->heading,
@@ -46,12 +50,14 @@ class DashboardController extends Controller
         }
     }
 
-    public function updatePost ($id) {
+    public function updatePost ($id)
+    {
         $updatedPost = Post::where('id', $id)->first();
         return view('update')->with('updatedPost', $updatedPost);
     }
 
-    public function update (UpdatePostRequest $request, $id) {
+    public function update (UpdatePostRequest $request, $id)
+    {
         $updatedPost = Post::where('id', $id)->update([
             'heading' => $request->heading,
             'content' => $request->content
@@ -67,12 +73,14 @@ class DashboardController extends Controller
         }
     }
 
-    public function deletePost ($id) {
+    public function deletePost ($id)
+    {
         Post::where('id', $id)->delete();
         return redirect('/auth-user-posts');
     }
 
-    public function likePost ($id) {
+    public function likePost ($id)
+    {
         $postId = $id;
         $userId = Auth::user()->id;
         $likedExist = Liked::where('post_id', $postId)->where('user_id', $userId)->first();
@@ -85,12 +93,14 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
-    public function showLikedPosts () {
+    public function showLikedPosts ()
+    {
         $user = User::with( 'likedPosts')->where('id', Auth::user()->id)->first(); // object
         return view('likedPosts')->with('LikedPosts', $user->likedPosts);
     }
 
-    public function unLikePost ($id) {
+    public function unLikePost ($id)
+    {
         $postId = $id;
         Liked::where('post_id', $postId)->where('user_id', Auth::user()->id)->delete();
         return redirect()->back();
