@@ -32,6 +32,7 @@ Route::get('/liked-user-posts', [DashboardController::class, 'showLikedPosts']);
 Route::get('/likePost/{id}', [DashboardController::class, 'likePost']);
 Route::get('/unlike/{id}', [DashboardController::class, 'unLikePost']);
 
+
 // Post crud
 Route::get('/create-post', [DashboardController::class, 'createPost']);
 Route::POST('/create', [DashboardController::class, 'create']);
@@ -44,6 +45,7 @@ Route::get('/login', [SignController::class, 'showSignIn']);
 Route::get('/register', [SignController::class, 'showSignUp']);
 Route::post('/login-user', [SignController::class, 'signIn']);
 Route::post('/register-user', [SignController::class, 'signUp']);
+Route::post('/change-password', [SignController::class, 'changePass']);
 Route::get('/log-out', [SignController::class, 'signOut']);
 
 // unknown links redirect

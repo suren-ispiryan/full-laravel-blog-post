@@ -53,6 +53,20 @@ class SignController extends Controller
         return abort(403);
     }
 
+    public function changePass (Request $request) {
+        $passChange = $request->input('passwordChange');
+        $passChangeRepeat = $request->input('repeatPasswordChange');
+        if ($passChange === $passChangeRepeat) {
+            User::where('id', Auth::user()->id)->update([
+                'password' => Hash::make($passChange)
+            ]);
+            return redirect()->back();
+        }
+        else {
+            return redirect()->back();
+        }
+    }
+
     public function signOut(){
         Auth::logout();
         return redirect('/all-posts');
