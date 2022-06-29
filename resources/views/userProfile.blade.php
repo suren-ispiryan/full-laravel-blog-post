@@ -29,7 +29,7 @@
                         <button class="btn btn-primary mt-2">Unfollow</button>
                     </a>
                 @endif
-                @if(!request()->is(`my-profile/{{dd(auth()->user()->id)}}`))
+                @if(request()->is('my-profile/*'))
                     <div class="row">
                        <div class="col-md-6">
                            <form action="/change-password" method="POST">
