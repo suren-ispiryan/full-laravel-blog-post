@@ -42,7 +42,12 @@ class SignController extends Controller
     public function signUp (RegisterRequest $request)
     {
         if ($request->password === $request->reEnterRegisterPassword) {
-            $user = User::create($request->toArray());
+            $user = User::create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
             if ($user) {
                 Auth::login($user);
                 return view('SignIn');
