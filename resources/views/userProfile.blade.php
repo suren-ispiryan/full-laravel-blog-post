@@ -17,7 +17,7 @@
                 >
             </div>
 
-            <div class="col-md-7 mt-5 user-data">
+            <div class="col-md-7 my-2 user-data">
                 <p><span class="text-primary">Name: </span>{{$data[0]->user->name}}</p>
                 <p><span class="text-primary">Surname: </span>{{$data[0]->user->surname}}</p>
                 <p><span class="text-primary">Email: </span>{{$data[0]->user->email}}</p>
@@ -69,7 +69,7 @@
         {{-- Posts --}}
         <div class="row mt-5">
             <div class="col-md-12">
-                <h3 class="text-primary profile-sections-heading">Blog posts</h3>
+                <h3 class="text-primary profile-sections-heading mt-3">Blog posts</h3>
             </div>
 
             <div class="row posts-parent profile-posts-parent">
