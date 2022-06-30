@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|min:2|max:18',
             'surname' => 'required|min:3|max:18',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:5|max:10'
+            'password' => 'required|same:password_confirmation|min:5|max:10'
         ];
     }
 
@@ -38,13 +38,14 @@ class RegisterRequest extends FormRequest
             'name.min' => 'name must be minimum 2 symbol',
             'name.max' => 'name must be maximum 18 symbol',
             'surname.required' => 'surname is required',
-            'surname.min' => 'name must be minimum 3 symbol',
-            'surname.max' => 'name must be maximum 18 symbol',
+            'surname.min' => 'surname must be minimum 3 symbol',
+            'surname.max' => 'surname must be maximum 18 symbol',
             'email.required' => 'email is required',
             'email.unique:users' => 'email must be unique',
             'password.required' => 'password is required',
-            'password.min' => 'name must be minimum 5 symbol',
-            'password.max' => 'name must be maximum 10 symbol',
+            'password.min' => 'password must be minimum 5 symbol',
+            'password.max' => 'password must be maximum 10 symbol',
+            'password.confirmed' => 'the password confirmation does not match ',
         ];
     }
 }

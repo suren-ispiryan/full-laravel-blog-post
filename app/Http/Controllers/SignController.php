@@ -41,7 +41,7 @@ class SignController extends Controller
 
     public function signUp (RegisterRequest $request)
     {
-        if ($request->password === $request->reEnterRegisterPassword) {
+//        if ($request->password === $request->reEnterRegisterPassword) {
             $user = User::create([
                 'name' => $request->name,
                 'surname' => $request->surname,
@@ -52,12 +52,11 @@ class SignController extends Controller
                 Auth::login($user);
                 return view('SignIn');
             }
-        }
-        else {
+//        }
+//        else {
             $errMsgRegistration = 'Username or password is incorrect';
             return view('signUp')->with('errMsgRegistration', $errMsgRegistration);
-        }
-        return abort(403);
+//        }
     }
 
     public function changePass (ChangePasswordRequest $request)

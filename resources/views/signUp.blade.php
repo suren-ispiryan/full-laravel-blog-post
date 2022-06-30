@@ -39,6 +39,7 @@
                                 type="text"
                                 class="form-control"
                                 id="name"
+                                value="{{ old('name') }}"
                                 placeholder="First name"
                             >
                         </div>
@@ -52,6 +53,7 @@
                                 type="text"
                                 class="form-control"
                                 id="surname"
+                                value="{{ old('surname') }}"
                                 placeholder="First name"
                             >
                         </div>
@@ -65,6 +67,7 @@
                                 type="email"
                                 class="form-control"
                                 id="registerEmail"
+                                value="{{ old('email') }}"
                                 placeholder="Enter email"
                             >
                         </div>
@@ -78,19 +81,20 @@
                                 type="password"
                                 class="form-control"
                                 id="registerPassword"
+                                value="{{ old('email') }}"
                                 placeholder="Password"
                             >
                         </div>
 
                         <div class="form-group">
-                            <label for="reEnterRegisterPassword" class="pl-1">
+                            <label for="password_confirmation" class="pl-1">
                                 Re-enter Password
                             </label>
                             <input
-                                name="reEnterRegisterPassword"
+                                name="password_confirmation"
                                 class="form-control"
                                 type="password"
-                                id="reEnterRegisterPassword"
+                                id="password_confirmation"
                                 placeholder="Re-enter password"
                             >
                         </div>
