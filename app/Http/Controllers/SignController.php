@@ -41,36 +41,37 @@ class SignController extends Controller
 
     public function signUp (RegisterRequest $request)
     {
-//        if ($request->password === $request->reEnterRegisterPassword) {
-            $user = User::create([
-                'name' => $request->name,
-                'surname' => $request->surname,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]);
-            if ($user) {
-                Auth::login($user);
-                return view('SignIn');
-            }
-//        }
-//        else {
-            $errMsgRegistration = 'Username or password is incorrect';
-            return view('signUp')->with('errMsgRegistration', $errMsgRegistration);
-//        }
+        $user = User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        if ($user) {
+            Auth::login($user);
+            return view('SignIn');
+        }
+        $errMsgRegistration = 'Username or password is incorrect';
+        return view('signUp')->with('errMsgRegistration', $errMsgRegistration);
     }
 
     public function changePass (ChangePasswordRequest $request)
     {
+        $oldPassword = $request->input('oldPassword');
         $passChange = $request->input('password');
         $passChangeRepeat = $request->input('repeatPasswordChange');
-        if ($passChange === $passChangeRepeat) {
-            User::where('id', Auth::user()->id)->update([
-                'password' => Hash::make($passChange)
-            ]);
-            return redirect()->back();
-        }
-        else {
-            return redirect()->back();
+
+        if (Hash::check($oldPassword, Auth::user()->password)) {
+            if ($passChange === $passChangeRepeat) {
+                User::where('id', Auth::user()->id)->update([
+                    'password' => Hash::make($passChange)
+                ]);
+                return redirect()->back()->with('passChangeMsgSuccess', 'Password successfully changed');
+            } else {
+                return redirect()->back()->with('passChangeMsgError', 'Passwords are not matches');
+            }
+        } else {
+            return redirect()->back()->with('passChangeMsgError', 'Old password is not correct');
         }
     }
 

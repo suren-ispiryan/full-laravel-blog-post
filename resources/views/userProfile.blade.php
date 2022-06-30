@@ -34,7 +34,12 @@
                        <div class="col-md-6">
                            <form action="/change-password" method="POST">
                                @csrf
-
+                               <input
+                                   type="password"
+                                   class="form-control mt-2"
+                                   name="oldPassword"
+                                   placeholder="Old password"
+                               >
                                <input
                                    type="password"
                                    class="form-control mt-2"
@@ -52,6 +57,14 @@
                                >
                                    Change password
                                </button>
+
+                               @if(session('passChangeMsgSuccess'))
+                                   <h6 class="alert alert-success  text-center">{{ session('passChangeMsgSuccess') }}</h6>
+                               @endif
+
+                               @if(session('passChangeMsgError'))
+                                   <h6 class="alert alert-danger text-center my-4">{{ session('passChangeMsgError') }}</h6>
+                               @endif
 
                                @if(count($errors) > 0)
                                    @foreach($errors->all() as $error)
