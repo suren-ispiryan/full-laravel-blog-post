@@ -24,6 +24,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
+            'oldPassword' => 'required|min:5|max:10',
             'password' => 'required|min:5|max:10'
         ];
     }
@@ -31,9 +32,12 @@ class ChangePasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'password.required' => 'password is required',
-            'password.min' => 'password must be minimum 5 symbol',
-            'password.max' => 'password must be maximum 10 symbol'
+            'oldPassword.required' => 'old password is required',
+            'oldPassword.min' => 'old password must be minimum 5 symbol',
+            'oldPassword.max' => 'old password must be maximum 10 symbol',
+            'password.required' => 'new password is required',
+            'password.min' => 'new password must be minimum 5 symbol',
+            'password.max' => 'new password must be maximum 10 symbol'
         ];
     }
 }
