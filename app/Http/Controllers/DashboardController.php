@@ -18,20 +18,25 @@ class DashboardController extends Controller
 {
     public function showAllPosts ()
     {
-
     // auth users liked posts
-        $data = User::with('likedPosts')
-            ->whereHas('posts', function ($query) {
-                $query->where('user_id', Auth::user()->id);
-            })
-            ->get();
-        $liked_ids = [];
-        foreach ($data[0]->likedPosts as $post) {
-            array_push($liked_ids, $post->id);
+        if (Auth::user()) {
+            $data = User::with('likedPosts')
+                ->whereHas('posts', function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                })
+                ->get();
+            $liked_ids = [];
+            foreach ($data[0]->likedPosts as $post) {
+                array_push($liked_ids, $post->id);
+            }
+        // all users posts
+            $allPosts = Post::with('user')->get();
+            return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
+        } else {
+            $allPosts = Post::with('user')->get();
+            return view('allPosts')->with('allPosts', $allPosts);
         }
-    // all users posts
-        $allPosts = Post::with('user')->get();
-        return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
+
     }
 
     public function showAuthUserPosts ()

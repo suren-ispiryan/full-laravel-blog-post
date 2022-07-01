@@ -22,12 +22,15 @@
                 <p><span class="text-primary">Surname: </span>{{$data[0]->user->surname}}</p>
                 <p><span class="text-primary">Email: </span>{{$data[0]->user->email}}</p>
                 @if(!request()->is('my-profile/*'))
-                    <a href="/follow/{{$data[0]->user->id}}">
-                        <button class="btn btn-primary mt-2">Follow</button>
-                    </a>
-                    <a href="/unfollow/{{$data[0]->user->id}}">
-                        <button class="btn btn-primary mt-2">Unfollow</button>
-                    </a>
+                    @if(!in_array($data[0]->user->id, $followingUsers))
+                        <a href="/follow/{{$data[0]->user->id}}">
+                            <button class="btn btn-primary mt-2">Follow</button>
+                        </a>
+                    @else
+                        <a href="/unfollow/{{$data[0]->user->id}}">
+                            <button class="btn btn-primary mt-2">Unfollow</button>
+                        </a>
+                    @endif
                 @endif
                 @if(request()->is('my-profile/*'))
                     <div class="row">
