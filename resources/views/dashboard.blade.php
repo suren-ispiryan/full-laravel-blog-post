@@ -68,6 +68,7 @@
                         @yield('allPosts')
                         @yield('myPosts')
                         @yield('likedPosts')
+                        @yield('postDetails')
                     </div>
                 </div>
             @endauth

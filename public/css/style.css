@@ -135,3 +135,28 @@ a {
     justify-content: left;
 }
 
+/* details */
+.post-image {
+    height: 300px;
+    width: 300px;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.post-data {
+    font-size: 24px;
+}
+
+.details-heading {
+    text-align: center;
+    font-size: 32px;
+}
+
+.details-data-parent {
+    display: flex;
+    margin-bottom: 15px !important;
+}
+
+.post-picture {
+    margin-top: 10px;
+}

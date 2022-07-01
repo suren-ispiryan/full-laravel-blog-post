@@ -29,7 +29,12 @@
 
                 <div class="row">
                     <div class="col-md-12 text-success">
-                        {{ $post->content }}
+                        {{ substr($post->content, 0, 10) }}...
+                        <a href="/post-details/{{ $post->id }}">
+                            <div class="mb-2 d-flex align-items-center text-primary">
+                                Show details ...
+                            </div>
+                        </a>
                     </div>
                 </div>
 
