@@ -2,13 +2,21 @@ For running project
 ===================
 
 step 1 -> Git clone project
+
 step 2 -> Install xampp
+
 step 3 -> Run xampp
+
 step 4 -> Install IDE (phpStoem or VS Code)
+
 step 5 -> Open project in IDE
+
 step 6 -> Create db called 'laravel-blog'
+
 step 7 -> In IDE terminal composer install
+
 step 8 -> In IDE terminal php artisan migrate
+
 step 9 -> In IDE terminal php artisan serve
 
 
