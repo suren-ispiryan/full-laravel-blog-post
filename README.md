@@ -11,7 +11,7 @@ step 4 -> Install IDE (phpStoem or VS Code)
 
 step 5 -> Open project in IDE
 
-step 6 -> Create db called 'laravel-blog'
+step 6 -> Create db called 'laravel_blog'
 
 step 7 -> In IDE terminal composer install
 
