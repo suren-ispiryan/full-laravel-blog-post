@@ -26,12 +26,17 @@ class DashboardController extends Controller
                 })
                 ->get();
             $liked_ids = [];
-            foreach ($data[0]->likedPosts as $post) {
-                array_push($liked_ids, $post->id);
+            if (count($data)) {
+                foreach ($data[0]->likedPosts as $post) {
+                    array_push($liked_ids, $post->id);
+                }
+                // all users posts
+                $allPosts = Post::with('user')->get();
+                return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
+            } else {
+                $allPosts = Post::with('user')->get();
+                return view('allPosts')->with('allPosts', $allPosts);
             }
-        // all users posts
-            $allPosts = Post::with('user')->get();
-            return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
         } else {
             $allPosts = Post::with('user')->get();
             return view('allPosts')->with('allPosts', $allPosts);
