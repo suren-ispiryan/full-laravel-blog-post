@@ -76,4 +76,9 @@ class ProfileController extends Controller
         return redirect()->route('followUser', ['id' => $id]);
 
     }
+
+    public function showPostDetails ($id) {
+       $postAllData = Post::with('user')->where('id', $id)->get();
+       return view('postDetails')->with('postData', $postAllData);
+    }
 }

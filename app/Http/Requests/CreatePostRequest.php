@@ -25,7 +25,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'heading' => 'required|min:3|max:15',
-            'content' => 'required|min:5|max:100'
+            'content' => 'required|min:5|max:500'
         ];
     }
 
@@ -37,7 +37,7 @@ class CreatePostRequest extends FormRequest
             'heading.max' => 'heading must be maximum 15 symbol',
             'content.required' => 'content is required',
             'content.min' => 'content must be minimum 5 symbol',
-            'content.max' => 'content must be maximum 100 symbol',
+            'content.max' => 'content must be maximum 500 symbol',
         ];
     }
 }
