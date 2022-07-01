@@ -33,8 +33,20 @@ class ProfileController extends Controller
 
     public function showChosenUserProfile ($id)
     {
+        // auth users follows ids
+        $followings = User::with('following')
+        ->whereHas('following',function ($query) {
+            $query->where('follower_id', Auth::user()->id);
+        })->get();
+        $followingUsers = [];
+        if($followings && count($followingUsers)) {
+            foreach ($followings[0]->following as $following) {
+                array_push($followingUsers, $following->id);
+            }
+        }
+        // chosen users
         $data = Post::with('user')->where('user_id', $id)->get();
-        return view('userProfile')->with('data', $data);
+        return view('userProfile')->with('data', $data)->with('followingUsers', $followingUsers);
     }
 
     public function follow ($id)
