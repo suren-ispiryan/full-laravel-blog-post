@@ -38,15 +38,18 @@ class ProfileController extends Controller
         ->whereHas('following',function ($query) {
             $query->where('follower_id', Auth::user()->id);
         })->get();
-        $followingUsers = [];
-        if($followings && count($followingUsers)) {
+        // chosen users
+        if(count($followings)) {
+            $followingUsers = [];
             foreach ($followings[0]->following as $following) {
                 array_push($followingUsers, $following->id);
             }
+            $data = Post::with('user')->where('user_id', $id)->get();
+            return view('userProfile')->with('data', $data)->with('followingUsers', $followingUsers);
+        } else {
+            $data = Post::with('user')->where('user_id', $id)->get();
+            return view('userProfile')->with('data', $data);
         }
-        // chosen users
-        $data = Post::with('user')->where('user_id', $id)->get();
-        return view('userProfile')->with('data', $data)->with('followingUsers', $followingUsers);
     }
 
     public function follow ($id)
@@ -59,7 +62,8 @@ class ProfileController extends Controller
                 'updated_at' => Carbon::now()
             )
         );
-        return redirect()->back();
+//        return redirect()->back();
+        return redirect()->route('followUser', ['id' => $id]);
     }
 
     public function unfollow ($id)
@@ -68,6 +72,8 @@ class ProfileController extends Controller
           ->where('follower_id', Auth::user()->id)
           ->where('following_id', $id)
           ->delete();
-        return redirect()->back();
+//        return redirect()->back();
+        return redirect()->route('followUser', ['id' => $id]);
+
     }
 }
