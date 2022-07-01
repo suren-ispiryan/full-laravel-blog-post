@@ -62,8 +62,7 @@ class ProfileController extends Controller
                 'updated_at' => Carbon::now()
             )
         );
-//        return redirect()->back();
-        return redirect()->route('followUser', ['id' => $id]);
+        return redirect()->back();
     }
 
     public function unfollow ($id)
@@ -72,8 +71,7 @@ class ProfileController extends Controller
           ->where('follower_id', Auth::user()->id)
           ->where('following_id', $id)
           ->delete();
-//        return redirect()->back();
-        return redirect()->route('followUser', ['id' => $id]);
+        return redirect()->back();
 
     }
 
