@@ -1,0 +1,37 @@
+         Blog
+========================
+     Description
+------------------------
+1. Guests
+  + Once clicked on the “Like” button in the post page should be redirected to the login/register page.
+
+2. Registration as user
+  + Create SugnIn page.
+  + Create SugnUp page.  
+  + First Name.
+  + Last Name.
+  + Email.
+  + Password.
+  + Re-enter password.
+  + Make request files for form validation -> sign up
+  + save password in db hashed
+  + Save data in inputs after wrong registration.
+
+3. Logged In User (Auth User)
+  + Make request files for form validation -> sign in, post create/update, change password
+  + Create home page and fill with folowed users posts.   
+  + Should have profile pages.  
+  + Should see a list of “Liked Posts”.
+  + Post CRUD.
+  + Should be able to like/dislike posts.
+  + Change password.
+  + Show users names in all posts page.
+  + Follow other users.
+  + Unfollow other users.  
+  + By clicking on followed users name, enter followed user's personal page. 
+  + Log out from accaunt.
+  
+4. For everyone
+  + Should see a list of all blog posts.  
+  + Auth Middleware.
+  + Should be able to see the post details page.
