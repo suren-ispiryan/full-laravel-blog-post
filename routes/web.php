@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/unfollow/{id}', [ProfileController::class, 'unfollow']);
     Route::get('/home-page', [ProfileController::class, 'homePage']);
     Route::get('/post-details/{id}', [ProfileController::class, 'showPostDetails']);
+    Route::post('/add-post/{id}', [ProfileController::class, 'createPost']);
 
     // Liked posts
     Route::get('/liked-user-posts', [DashboardController::class, 'showLikedPosts']);
@@ -38,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Post crud
     Route::get('/create-post', [DashboardController::class, 'createPost']);
-    Route::POST('/create', [DashboardController::class, 'create']);
+    Route::post('/create', [DashboardController::class, 'create']);
     Route::get('/update-post/{id}', [DashboardController::class, 'updatePost']);
     Route::post('/update/{id}', [DashboardController::class, 'update']);
     Route::get('/delete-post/{id}', [DashboardController::class, 'deletePost']);

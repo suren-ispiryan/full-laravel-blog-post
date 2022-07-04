@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-// Models
+
 use App\Models\User;
-// Requests
-use Illuminate\Http\Request;
+use App\Models\Post;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ChangePasswordRequest;
-// Facades
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,10 +32,25 @@ class SignController extends Controller
             'password' => $password
         ];
         if (Auth::attempt($credentials)) {
-            return redirect('/all-posts');
+            $data = User::with('likedPosts')
+                ->whereHas('posts', function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                })
+                ->get();
+            if (count($data)) {
+                $liked_ids = [];
+                foreach ($data[0]->likedPosts as $post) {
+                    array_push($liked_ids, $post->id);
+                }
+                $allPosts = Post::with('user')->get();
+                return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
+            } else {
+                $liked_ids = [];
+                $allPosts = Post::with('user')->get();
+                return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
+            }
         }
-        $errLogin = 'Username or password is incorrect';
-        return view('signIn')->with('errLogin', $errLogin);
+        return view('signIn')->with('errLogin', 'Username or password is incorrect');
     }
 
     public function signUp (RegisterRequest $request)
@@ -51,8 +65,7 @@ class SignController extends Controller
             Auth::login($user);
             return view('SignIn');
         }
-        $errMsgRegistration = 'Username or password is incorrect';
-        return view('signUp')->with('errMsgRegistration', $errMsgRegistration);
+        return view('signUp')->with('errMsgRegistration', 'Username or password is incorrect');
     }
 
     public function changePass (ChangePasswordRequest $request)

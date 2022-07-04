@@ -24,20 +24,20 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'heading' => 'required|min:3|max:15',
-            'content' => 'required|min:5|max:500'
+            'postHeading' => 'required|min:3|max:15',
+            'postContent' => 'required|min:5|max:500'
         ];
     }
 
     public function messages()
     {
         return [
-            'heading.required' => 'heading is required',
-            'heading.min' => 'heading must be minimum 3 symbol',
-            'heading.max' => 'heading must be maximum 15 symbol',
-            'content.required' => 'content is required',
-            'content.min' => 'content must be minimum 5 symbol',
-            'content.max' => 'content must be maximum 500 symbol',
+            'postHeading.required' => 'heading is required',
+            'postHeading.min' => 'heading must be minimum 3 symbol',
+            'postHeading.max' => 'heading must be maximum 15 symbol',
+            'postContent.required' => 'content is required',
+            'postContent.min' => 'content must be minimum 5 symbol',
+            'postContent.max' => 'content must be maximum 500 symbol',
         ];
     }
 }
