@@ -34,7 +34,7 @@
 
             <div class="row">
                 <div class="col-md-12 mt-5 post-data">
-                    <p class="details-heading"><span class="text-primary">Post: </span>{{ $post->heading }}</p>
+                    <p class="details-heading"><span class="text-primary">heading: </span>{{ $post->heading }}</p>
                 </div>
             </div>
 
@@ -46,6 +46,40 @@
                     </p>
                 </div>
             </div>
+
+            {{-- comment --}}
+            <div class="row">
+                <div class="col-md-12 my-1 post-data">
+                    <p>
+                        <h2 class="text-primary details-content">comments: </h2>
+
+                        @auth
+                        <form class="d-flex" action="/add-post/{{$post->id}}" method="POST">
+                            @csrf
+                            <input
+                                type="text"
+                                name="comment"
+                                class="form-control mr-2"
+                                placeholder="Comment"
+                            >
+                            <button
+                                class="btn btn-success ml-2"
+                            >
+                                Comment
+                            </button>
+                        </form>
+                        <hr>
+                    @endauth
+                         @foreach($comments as $comment)
+                             <h6 class="mt-1">{{ $comment->user->name }}</h6>
+                             <h5 class="mb-2">{{ $comment->comment }}</h5>
+                             <hr>
+                         @endforeach
+                    </p>
+                </div>
+            </div>
+
+
         @endforeach
     </div>
 @endsection

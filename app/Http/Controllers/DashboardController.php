@@ -2,36 +2,35 @@
 
 namespace App\Http\Controllers;
 
-// Requests
-use Illuminate\Http\Request;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-// Facades
 use Illuminate\Support\Facades\Auth;
-// Models
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Liked;
-use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
     public function showAllPosts ()
     {
-    // auth users liked posts
         if (Auth::user()) {
             $data = User::with('likedPosts')
                 ->whereHas('posts', function ($query) {
                     $query->where('user_id', Auth::user()->id);
                 })
                 ->get();
-            $liked_ids = [];
-            foreach ($data[0]->likedPosts as $post) {
-                array_push($liked_ids, $post->id);
+            if (count($data)) {
+                $liked_ids = [];
+                foreach ($data[0]->likedPosts as $post) {
+                    array_push($liked_ids, $post->id);
+                }
+                $allPosts = Post::with('user')->get();
+                return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
+            } else {
+                $liked_ids = [];
+                $allPosts = Post::with('user')->get();
+                return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
             }
-        // all users posts
-            $allPosts = Post::with('user')->get();
-            return view('allPosts')->with('allPosts', $allPosts)->with('liked_ids', $liked_ids);
         } else {
             $allPosts = Post::with('user')->get();
             return view('allPosts')->with('allPosts', $allPosts);
@@ -41,7 +40,7 @@ class DashboardController extends Controller
 
     public function showAuthUserPosts ()
     {
-        $authUserPosts = User::find(Auth::user()->id)->Posts;
+        $authUserPosts = User::find(Auth::user()->id)->posts;
         return view('myPosts')->with('authUserPosts', $authUserPosts);
     }
 
@@ -52,19 +51,15 @@ class DashboardController extends Controller
 
     public function create (CreatePostRequest $request)
     {
-        $post = Post::create([
-            'user_id' => Auth::user()->id,
-            'heading' => $request->heading,
-            'content' => $request->content
-        ]);
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $post = Post::create($data);
         if ($post) {
             $successMsg = 'Post was successfully created';
-            return view('create')->with('successMsg', $successMsg);
-        }
-        else {
+        } else {
             $successMsg = 'Something went wrong';
-            return view('create')->with('successMsg', $successMsg);
         }
+        return view('create')->with('successMsg', $successMsg);
     }
 
     public function updatePost ($id)
@@ -76,15 +71,14 @@ class DashboardController extends Controller
     public function update (UpdatePostRequest $request, $id)
     {
         $updatedPost = Post::where('id', $id)->update([
-            'heading' => $request->heading,
-            'content' => $request->content
+            'heading' => $request->postHeading,
+            'content' => $request->postContent
         ]);
         if ($updatedPost) {
             $authUserPosts = User::find(Auth::user()->id)->Posts;
             $successMsg = 'Post was successfully updated';
             return redirect('/auth-user-posts')->with('successMsg', $successMsg)->with('authUserPosts', $authUserPosts);
-        }
-        else {
+        } else {
             $successMsg = 'Something went wrong';
             return view('update')->with('successMsg', $successMsg);
         }
@@ -96,9 +90,8 @@ class DashboardController extends Controller
         return redirect('/auth-user-posts');
     }
 
-    public function likePost ($id)
+    public function likePost ($postId)
     {
-        $postId = $id;
         $userId = Auth::user()->id;
         $likedExist = Liked::where('post_id', $postId)->where('user_id', $userId)->first();
         if (! $likedExist) {
@@ -112,13 +105,12 @@ class DashboardController extends Controller
 
     public function showLikedPosts ()
     {
-        $user = User::with( 'likedPosts')->where('id', Auth::user()->id)->first(); // object
+        $user = User::with( 'likedPosts')->where('id', Auth::user()->id)->first();
         return view('likedPosts')->with('LikedPosts', $user->likedPosts);
     }
 
-    public function unLikePost ($id)
+    public function unLikePost ($postId)
     {
-        $postId = $id;
         Liked::where('post_id', $postId)->where('user_id', Auth::user()->id)->delete();
         return redirect()->back();
     }

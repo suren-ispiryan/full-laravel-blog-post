@@ -33,14 +33,14 @@
 
                     <input
                         type="text"
-                        name="heading"
+                        name="postHeading"
                         class="form-control mt-4"
                         placeholder="Heading"
                         value="{{$updatedPost->heading}}"
                     >
 
                     <textarea
-                        name="content"
+                        name="postContent"
                         class="form-control mt-4"
                         placeholder="Write a post"
                         rows="4" cols="50"

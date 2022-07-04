@@ -46,6 +46,10 @@ li {
     list-style-type: none;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 a {
     font-size: 18px;
     margin-top: 20px;
@@ -148,7 +152,7 @@ a {
 }
 
 .details-heading {
-    text-align: center;
+    /*text-align: center;*/
     font-size: 32px;
 }
 

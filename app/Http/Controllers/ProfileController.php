@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// Facades
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-// Models
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
 
 class ProfileController extends Controller
 {
@@ -33,12 +32,11 @@ class ProfileController extends Controller
 
     public function showChosenUserProfile ($id)
     {
-        // auth users follows ids
         $followings = User::with('following')
         ->whereHas('following',function ($query) {
             $query->where('follower_id', Auth::user()->id);
         })->get();
-        // chosen users
+
         if(count($followings)) {
             $followingUsers = [];
             foreach ($followings[0]->following as $following) {
@@ -76,7 +74,32 @@ class ProfileController extends Controller
     }
 
     public function showPostDetails ($id) {
-       $postAllData = Post::with('user')->where('id', $id)->get();
-       return view('postDetails')->with('postData', $postAllData);
+        $data = Post::with('comments')->where('id', $id)->get();
+//        dd($data);
+        if (count($data)) {
+            $comments = [];
+            foreach ($data[0]->comments as $commentList) {
+                array_push($comments, $commentList);
+            }
+            $postAllData = Post::with('user')->where('id', $id)->get();
+            return view('postDetails')->with('postData', $postAllData)->with('comments', $comments);
+        } else {
+            $postAllData = Post::with('user')->where('id', $id)->get();
+            return view('postDetails')->with('postData', $postAllData);
+        }
+    }
+
+    public function createPost (Request $request, $id) {
+        $comment = Comment::create([
+            'user_id' => Auth::user()->id,
+            'post_id' => $id,
+            'comment' => $request->comment
+        ]);
+        if ($comment) {
+            return redirect('/post-details/'.$id);
+        } else {
+            abort(403);
+        }
+
     }
 }

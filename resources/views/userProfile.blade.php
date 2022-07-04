@@ -91,38 +91,35 @@
             <div class="row posts-parent profile-posts-parent">
                 @foreach($data as $post)
                     <div class="col-md-3 post mx-4">
-                        <div class="row">
-                            <div class="col-md-12 text-danger all-post-heading">
-                                {{ $post->heading }}
+                        <a href="/post-details/{{ $post->id }}">
+                            <div class="row">
+                                <div class="col-md-12 text-danger all-post-heading">
+                                    {{ $post->heading }}
+                                </div>
                             </div>
-                        </div>
 
-                        <hr>
+                            <hr>
 
-                        <div class="row">
-                            <div class="col-md-12 text-danger all-post-heading">
-                                <img
-                                    class="img-fluid"
-                                    src="{{URL::asset('/assets/posts-backgrounds/post-picture.jpg')}}"
-                                    alt="profile Pic"
-                                    height="200"
-                                    width="200"
-                                >
+                            <div class="row">
+                                <div class="col-md-12 text-danger all-post-heading">
+                                    <img
+                                        class="img-fluid"
+                                        src="{{URL::asset('/assets/posts-backgrounds/post-picture.jpg')}}"
+                                        alt="profile Pic"
+                                        height="200"
+                                        width="200"
+                                    >
+                                </div>
                             </div>
-                        </div>
 
-                        <hr>
+                            <hr>
 
-                        <div class="row">
-                            <div class="col-md-12 text-success mx-3">
-                                {{ substr($post->content, 0, 10) }}...
-                                <a href="/post-details/{{ $post->id }}">
-                                    <div class="mb-2 d-flex align-items-center text-primary">
-                                        Show details ...
-                                    </div>
-                                </a>
+                            <div class="row">
+                                <div class="col-md-12 text-success mx-3">
+                                    {{ substr($post->content, 0, 10) }}...
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
