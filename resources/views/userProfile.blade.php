@@ -1,7 +1,6 @@
 @extends('dashboard')
 @section('userProfile')
     <div class="container">
-
         {{-- profile data --}}
         <div class="row">
             <div class="col-md-12">
@@ -21,18 +20,20 @@
                 <p><span class="text-primary">Name: </span>{{$data[0]->user->name}}</p>
                 <p><span class="text-primary">Surname: </span>{{$data[0]->user->surname}}</p>
                 <p><span class="text-primary">Email: </span>{{$data[0]->user->email}}</p>
+
                 @if(!request()->is('my-profile/*'))
                     @if(!isset($followingUsers) || !in_array($data[0]->user->id, $followingUsers))
-                        <a href="/follow/{{$data[0]->user->id}}">
-                            <button class="btn btn-primary mt-2">Follow</button>
-                        </a>
+                            <a href="/follow/{{$data[0]->user->id}}">
+                                <button class="btn btn-primary mt-2">Follow</button>
+                            </a>
                     @else
                         <a href="/unfollow/{{$data[0]->user->id}}">
                             <button class="btn btn-primary mt-2">Unfollow</button>
                         </a>
                     @endif
                 @endif
-            @if(request()->is('my-profile/*'))
+
+                @if(request()->is('my-profile/*'))
                     <div class="row">
                        <div class="col-md-6">
                            <form action="/change-password" method="POST">
@@ -76,9 +77,10 @@
                                @endif
                            </form>
                        </div>
-                        <div class="col-md-6"></div>
+                       <div class="col-md-6"></div>
                     </div>
                 @endif
+
             </div>
         </div>
 

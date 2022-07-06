@@ -164,3 +164,23 @@ a {
 .post-picture {
     margin-top: 10px;
 }
+
+.update-comment-form-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.update-comment-form {
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50%;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.comment-crud-container {
+    display: flex;
+    justify-content: flex-start;
+}

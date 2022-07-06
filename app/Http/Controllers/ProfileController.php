@@ -36,7 +36,6 @@ class ProfileController extends Controller
         ->whereHas('following',function ($query) {
             $query->where('follower_id', Auth::user()->id);
         })->get();
-
         if(count($followings)) {
             $followingUsers = [];
             foreach ($followings[0]->following as $following) {
@@ -75,7 +74,6 @@ class ProfileController extends Controller
 
     public function showPostDetails ($id) {
         $data = Post::with('comments')->where('id', $id)->get();
-//        dd($data);
         if (count($data)) {
             $comments = [];
             foreach ($data[0]->comments as $commentList) {
@@ -89,7 +87,8 @@ class ProfileController extends Controller
         }
     }
 
-    public function createPost (Request $request, $id) {
+    public function createComment (Request $request, $id)
+    {
         $comment = Comment::create([
             'user_id' => Auth::user()->id,
             'post_id' => $id,
@@ -100,6 +99,22 @@ class ProfileController extends Controller
         } else {
             abort(403);
         }
+    }
 
+    public function showUpdateComment ($id)
+    {
+        $comment = Comment::where('id', $id)->first();
+        return view('editComment')->with('comment', $comment);
+    }
+
+    public function updateComment (Request  $request, $id) {
+        Comment::where('id', $id)->update(['comment' => $request->commentEdit]);
+        $postId = Comment::with('post')->where('id', $id)->first();
+        return redirect('/post-details/'.$postId->post_id);
+    }
+
+    public function deleteComment ($id){
+        Comment::where('id', $id)->delete();
+        return redirect()->back();
     }
 }
