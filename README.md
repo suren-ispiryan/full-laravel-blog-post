@@ -51,6 +51,8 @@ Completed Tasks and functionality of the site
   + Unfollow other users.  
   + By clicking on followed users name, enter followed user's personal page. 
   + Log out from accaunt.
+  + Add comments under posts in post details page.  
+  + Coment crud
   
 4. For everyone
   + Should see a list of all blog posts.  
