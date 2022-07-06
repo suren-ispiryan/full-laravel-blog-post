@@ -87,7 +87,7 @@
                                             update comment
                                         </button>
                                     </form>
-                                    <form action="/delete-comment/{{$comment->id}}" method="GET" class="mr-2>
+                                    <form action="/delete-comment/{{$comment->id}}" method="GET" class="mr-2">
                                         @csrf
                                         <button
                                             type="submit"

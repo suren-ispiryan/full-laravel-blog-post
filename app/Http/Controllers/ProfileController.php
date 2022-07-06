@@ -72,7 +72,8 @@ class ProfileController extends Controller
 
     }
 
-    public function showPostDetails ($id) {
+    public function showPostDetails ($id)
+    {
         $data = Post::with('comments')->where('id', $id)->get();
         if (count($data)) {
             $comments = [];
@@ -113,7 +114,8 @@ class ProfileController extends Controller
         return redirect('/post-details/'.$postId->post_id);
     }
 
-    public function deleteComment ($id){
+    public function deleteComment ($id)
+    {
         Comment::where('id', $id)->delete();
         return redirect()->back();
     }
