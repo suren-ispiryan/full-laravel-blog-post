@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/liked-user-posts', [DashboardController::class, 'showLikedPosts']);
     Route::get('/likePost/{id}', [DashboardController::class, 'likePost']);
     Route::get('/unlike/{id}', [DashboardController::class, 'unLikePost']);
+    Route::get('/like-comment/{id}', [DashboardController::class, 'likeComment']);
+    Route::get('/dislike-comment/{id}', [DashboardController::class, 'disLikeComment']);
     // Post crud
     Route::get('/create-post', [DashboardController::class, 'createPost']);
     Route::post('/create', [DashboardController::class, 'create']);
