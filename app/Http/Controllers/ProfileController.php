@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Like;
 use App\Models\Comment;
 
 class ProfileController extends Controller
@@ -69,19 +70,31 @@ class ProfileController extends Controller
           ->where('following_id', $id)
           ->delete();
         return redirect()->back();
-
     }
 
     public function showPostDetails ($id)
     {
+        // Post comments
         $data = Post::with('comments')->where('id', $id)->get();
         if (count($data)) {
             $comments = [];
             foreach ($data[0]->comments as $commentList) {
                 array_push($comments, $commentList);
             }
+
+            // Post likes
+            $likes = Like::where('likeable_type', Comment::class)->where('user_id', Auth::user()->id)->get();
+            $likeIds = [];
+            foreach ($likes as $like) {
+                array_push($likeIds, $like->likeable_id);
+            }
+
+            // Post data
             $postAllData = Post::with('user')->where('id', $id)->get();
-            return view('postDetails')->with('postData', $postAllData)->with('comments', $comments);
+            return view('postDetails')
+                 ->with('postData', $postAllData)
+                 ->with('comments', $comments)
+                 ->with('likeIds', $likeIds);
         } else {
             $postAllData = Post::with('user')->where('id', $id)->get();
             return view('postDetails')->with('postData', $postAllData);

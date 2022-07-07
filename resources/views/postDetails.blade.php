@@ -76,28 +76,51 @@
                                 <h6 class="mt-1">{{ $comment->user->name }}</h6>
                             </a>
                             <h5 class="mb-2">{{ $comment->comment }}</h5>
-                            @if(auth()->user()->id === $comment->user->id)
-                                <div class="comment-crud-container">
+                            <div class="comment-crud-container">
+                                @auth()
+                                    @if(! in_array($comment->id, $likeIds))
+                                        <form action="/like-comment/{{$comment->id}}" method="GET" class="mr-2">
+                                            @csrf
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                            >
+                                                like
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="/dislike-comment/{{$comment->id}}" method="GET" class="mr-2">
+                                            @csrf
+                                            <button
+                                                type="submit"
+                                                class="btn btn-dark"
+                                            >
+                                                dislike
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                                @if(auth()->user()->id === $comment->user->id)
                                     <form action="/show-update-comment/{{$comment->id}}" method="GET" class="mr-2">
                                         @csrf
                                         <button
                                             type="submit"
-                                            class="btn btn-primary"
+                                            class="btn btn-success"
                                         >
-                                            update comment
+                                            update
                                         </button>
                                     </form>
                                     <form action="/delete-comment/{{$comment->id}}" method="GET" class="mr-2">
                                         @csrf
                                         <button
                                             type="submit"
-                                            class="btn btn-primary"
+                                            class="btn btn-danger"
                                         >
-                                            delete comment
+                                            delete
                                         </button>
                                     </form>
-                                </div>
-                            @endif
+                                @endif
+                            </div>
                             <hr>
                         @endforeach
                     </p>

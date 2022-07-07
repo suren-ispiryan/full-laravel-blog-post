@@ -32,14 +32,12 @@ class SignController extends Controller
             'password' => $password
         ];
         if (Auth::attempt($credentials)) {
-            $data = User::with('likedPosts')
-                ->whereHas('posts', function ($query) {
-                    $query->where('user_id', Auth::user()->id);
-                })
-                ->get();
+            $data = Post::whereHas('likes', function($query) {
+                $query->where('user_id', Auth::user()->id);
+            })->get();
             if (count($data)) {
                 $liked_ids = [];
-                foreach ($data[0]->likedPosts as $post) {
+                foreach ($data as $post) {
                     array_push($liked_ids, $post->id);
                 }
                 $allPosts = Post::with('user')->get();
