@@ -53,6 +53,7 @@ Completed Tasks and functionality of the site
   + Log out from accaunt.
   + Add comments under posts in post details page.  
   + Coment crud
+  + Comment like/dislike with polymorphic relationship.
   
 4. For everyone
   + Should see a list of all blog posts.  
