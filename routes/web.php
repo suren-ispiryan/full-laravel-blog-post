@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/show-update-comment/{id}', [ProfileController::class, 'showUpdateComment']);
     Route::post('/update-comment/{id}', [ProfileController::class, 'updateComment']);
     Route::get('/delete-comment/{id}', [ProfileController::class, 'deleteComment']);
-    // Liked posts
+    // Liked / dislike
     Route::get('/liked-user-posts', [DashboardController::class, 'showLikedPosts']);
     Route::get('/likePost/{id}', [DashboardController::class, 'likePost']);
     Route::get('/unlike/{id}', [DashboardController::class, 'unLikePost']);

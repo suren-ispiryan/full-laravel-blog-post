@@ -52,44 +52,30 @@ class ProfileController extends Controller
 
     public function follow ($id)
     {
-        DB::table('follows')->insert(
-            array(
-                'follower_id' => Auth::user()->id,
-                'following_id' => $id,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            )
-        );
+        Auth::user()->following()->withTimestamps()->attach($id);
         return redirect()->back();
     }
 
     public function unfollow ($id)
     {
-        DB::table('follows')
-          ->where('follower_id', Auth::user()->id)
-          ->where('following_id', $id)
-          ->delete();
+        Auth::user()->following()->detach($id);
         return redirect()->back();
     }
 
     public function showPostDetails ($id)
     {
-        // Post comments
         $data = Post::with('comments')->where('id', $id)->get();
         if (count($data)) {
             $comments = [];
             foreach ($data[0]->comments as $commentList) {
                 array_push($comments, $commentList);
             }
-
-            // Post likes
             $likes = Like::where('likeable_type', Comment::class)->where('user_id', Auth::user()->id)->get();
             $likeIds = [];
             foreach ($likes as $like) {
                 array_push($likeIds, $like->likeable_id);
             }
 
-            // Post data
             $postAllData = Post::with('user')->where('id', $id)->get();
             return view('postDetails')
                  ->with('postData', $postAllData)
