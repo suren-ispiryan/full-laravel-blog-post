@@ -51,8 +51,10 @@ class DashboardController extends Controller
     public function create (CreatePostRequest $request)
     {
         $data = $request->all();
-        $data['user_id'] = Auth::user()->id;
-        $post = Post::create($data);
+        $post = Auth::user()->posts()->create([
+            'heading' => $data['heading'],
+            'content' => $data['content'],
+        ]);
         if ($post) {
             $successMsg = 'Post was successfully created';
         } else {

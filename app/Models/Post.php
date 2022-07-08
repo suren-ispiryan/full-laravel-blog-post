@@ -15,20 +15,23 @@ class Post extends Model
         'content'
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function users () {
+    public function users ()
+    {
         return $this->belongsToMany(User::class, 'likeds','post_id', 'user_id');
     }
 
-    public function comments () {
+    public function comments ()
+    {
         return $this->hasMany(Comment::class);
     }
 
     public function likes()
     {
-        return $this->morphMany(Like::class, "likeable");
+        return $this->morphMany(Like::class, 'likeable');
     }
 }
