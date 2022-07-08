@@ -54,6 +54,7 @@ Completed Tasks and functionality of the site
   + Add comments under posts in post details page.  
   + Coment crud
   + Comment like/dislike with polymorphic relationship.
+  + Add post soft delete.
   
 4. For everyone
   + Should see a list of all blog posts.  
