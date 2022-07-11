@@ -16,27 +16,31 @@
                     <li class="navbar-items btn">
                         <a href="/" class="{{ (request()->is('/')) ? 'active' : 'text-success' }}">All posts</a>
                     </li>
-                @auth
-                     <li class="navbar-items btn">
-                        <a href="/home-page" class="{{ (request()->is('home-page')) ? 'active' : 'text-success' }}">Home</a>
-                    </li>
-                    <li class="navbar-items btn">
-                        <a href="/my-profile/{{Auth::user()->id}}"
-                           class="{{ (request()->is('my-profile/*') || request()->is('user-profile/*')) ? 'active' : 'text-success' }}"
-                        >
-                            Profile
-                        </a>
-                    </li>
-                    <li class="navbar-items btn">
-                        <a href="/create-post" class="{{ (request()->is('create-post')) ? 'active' : 'text-success' }}">Create</a>
-                    </li>
-                    <li class="navbar-items btn">
-                        <a href="/auth-user-posts" class="{{ (request()->is('auth-user-posts')) ? 'active' : 'text-success' }}">My posts</a>
-                    </li>
-                    <li class="navbar-items btn">
-                        <a href="/liked-user-posts" class="{{ (request()->is('liked-user-posts')) ? 'active' : 'text-success' }}">Liked posts</a>
-                    <li>
-                @endauth
+                    @auth
+                         <li class="navbar-items btn">
+                            <a href="/home-page" class="{{ (request()->is('home-page')) ? 'active' : 'text-success' }}">Home</a>
+                        </li>
+                        <li class="navbar-items btn">
+                            <a href="/my-profile/{{Auth::user()->id}}"
+                               class="{{ (request()->is('my-profile/*') || request()->is('user-profile/*')) ? 'active' : 'text-success' }}"
+                            >
+                                Profile
+                            </a>
+                        </li>
+                        <li class="navbar-items btn">
+                            <a href="/create-post" class="{{ (request()->is('create-post')) ? 'active' : 'text-success' }}">Create</a>
+                        </li>
+                        <li class="navbar-items btn">
+                            <a href="/auth-user-posts" class="{{ (request()->is('auth-user-posts')) ? 'active' : 'text-success' }}">My posts</a>
+                        </li>
+                        <li class="navbar-items btn">
+                            <a href="/liked-user-posts" class="{{ (request()->is('liked-user-posts')) ? 'active' : 'text-success' }}">Liked posts</a>
+                        </li>
+                        <li class="navbar-items btn">
+                            <a href="/deleted-posts-posts" class="{{ (request()->is('deleted-posts-posts')) ? 'active' : 'text-success' }}">Deleted posts</a>
+                        </li>
+                    @endauth
+                </ul>
             </div>
 
             <div class="col-md-2 control-buttons">
@@ -70,6 +74,7 @@
                         @yield('likedPosts')
                         @yield('postDetails')
                         @yield('editComment')
+                        @yield('deletedPosts')
                     </div>
                 </div>
             @endauth
