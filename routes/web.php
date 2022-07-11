@@ -47,6 +47,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/update-post/{id}', [DashboardController::class, 'updatePost']);
     Route::post('/update/{id}', [DashboardController::class, 'update']);
     Route::get('/delete-post/{id}', [DashboardController::class, 'deletePost']);
+    // soft delete
+    Route::get('/deleted-posts-posts', [DashboardController::class, 'deletedPosts']);
+    Route::get('/deletePostForever/{id}', [DashboardController::class, 'deleteForever']);
+    Route::get('/restorePost/{id}', [DashboardController::class, 'restorePost']);
     // Registration routes
     Route::post('/change-password', [SignController::class, 'changePass']);
     Route::get('/log-out', [SignController::class, 'signOut']);

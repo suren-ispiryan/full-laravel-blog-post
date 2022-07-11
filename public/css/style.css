@@ -184,3 +184,24 @@ a {
     display: flex;
     justify-content: flex-start;
 }
+
+/* Deleted posts */
+.deleted-posts-parent {
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.deleted-posts-columns {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+    border-right: 1px black solid;
+}
+
+.deleted-posts-action-columns {
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center !important;
+}

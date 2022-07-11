@@ -12,6 +12,21 @@ use App\Models\Comment;
 
 class DashboardController extends Controller
 {
+    public function deletedPosts () {
+        $authUserTrashedPosts = Post::where('user_id', Auth::user()->id)->onlyTrashed()->get();
+        return view('deletedPosts')->with('authUserTrashedPosts', $authUserTrashedPosts);
+    }
+
+    public function deleteForever ($id) {
+        Post::where('id', $id)->forceDelete();
+        return redirect()->back();
+    }
+
+    public function restorePost ($id) {
+        Post::where('id', $id)->restore();
+        return redirect()->back();
+    }
+
     public function showAllPosts ()
     {
         if (Auth::user()) {
