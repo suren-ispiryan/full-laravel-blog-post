@@ -21,6 +21,9 @@
                             <a href="/home-page" class="{{ (request()->is('home-page')) ? 'active' : 'text-success' }}">Home</a>
                         </li>
                         <li class="navbar-items btn">
+                            <a href="/liked-user-posts" class="{{ (request()->is('liked-user-posts')) ? 'active' : 'text-success' }}">Liked posts</a>
+                        </li>
+                        <li class="navbar-items btn">
                             <a href="/my-profile/{{Auth::user()->id}}"
                                class="{{ (request()->is('my-profile/*') || request()->is('user-profile/*')) ? 'active' : 'text-success' }}"
                             >
@@ -32,9 +35,6 @@
                         </li>
                         <li class="navbar-items btn">
                             <a href="/auth-user-posts" class="{{ (request()->is('auth-user-posts')) ? 'active' : 'text-success' }}">My posts</a>
-                        </li>
-                        <li class="navbar-items btn">
-                            <a href="/liked-user-posts" class="{{ (request()->is('liked-user-posts')) ? 'active' : 'text-success' }}">Liked posts</a>
                         </li>
                         <li class="navbar-items btn">
                             <a href="/deleted-posts-posts" class="{{ (request()->is('deleted-posts-posts')) ? 'active' : 'text-success' }}">Deleted posts</a>
