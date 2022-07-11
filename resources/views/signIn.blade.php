@@ -11,7 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     </head>
-    <body class="antialiased">
+    <body class="antialiased login-parent">
         <div class="container">
             <div class="row py-5 sign-form-parent">
                 <div class="col-md-6">
@@ -68,7 +68,7 @@
                             <div class="sign-helper">
                                 <small>
                                     Not registered yet? Register
-                                    <a href="/register">here</a>
+                                    <a class="sign-helper-small" href="/register"><u>here</u></a>
                                 </small>
                             </div>
                         </div>

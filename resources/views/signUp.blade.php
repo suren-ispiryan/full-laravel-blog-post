@@ -11,11 +11,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     </head>
-    <body class="antialiased">
+    <body class="antialiased login-parent">
         <div class="container">
             <div class="row py-5 sign-form-parent">
                 <div class="col-md-6">
-                    <form class="sign-form p-4" action="/register-user" method="POST">
+                    <form class="sign-form p-4 register-form" action="/register-user" method="POST">
                         @csrf
 
                         <h2 class="sign-heading">Register</h2>
@@ -111,7 +111,7 @@
                         <div class="sign-helper">
                             <smnall>
                                 you can login
-                                <a href="/login">here</a>
+                                <a href="/login" class="sign-helper-small"><u>here</u></a>
                             </smnall>
                         </div>
                     </form>
