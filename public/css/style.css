@@ -3,18 +3,41 @@ body {
 }
 
 /* Sign blade */
+.login-parent {
+    background: url("./../assets/login-background/top-line-management-login-background-1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.sign-helper-small {
+    color: white !important;
+}
+
 .sign-heading {
     text-align: center;
 }
 
 .sign-form {
-    border: 1px black solid;
+    color: white;
+    background-color: rgb(0, 0, 0, 0.5);
+    margin-top: 200px;
+    border-radius: 5px;
+}
+
+.register-form {
+    color: white;
+    background-color: rgb(0, 0, 0, 0.5);
+    margin-top: 10px;
     border-radius: 5px;
 }
 
 .sign-form-parent {
     display: flex;
-   justify-content: right;
+    justify-content: center;
 }
 
 .sign-button {
